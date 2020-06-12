@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id='edit_header'>
+        <h1>Edit Show {{show.id}}</h1>
+    </div>
+    <div id='edit_form'>
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <li {% if message.tags %} class="{{ message.tags }}" {% endif %}>{{ message }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="/edit_show/{{show.id}}" method="POST">
+            {% csrf_token %}
+            Title:<input type="text" name="title"  placeholder='{{show.title}}'/><br />
+            Network:<input type='text' name='network'  placeholder='{{show.network}}'/> 
+            Release Date:<input type='date' name='release_date'   placeholder='{{show.release_date}}'/><br/>
+            Description: <input type="text" name="description"  placeholder='{{show.description}}'/><br />
+            <input type="submit" value="Update" />
+        </form>
+    </div>
+</body>
+</html>
